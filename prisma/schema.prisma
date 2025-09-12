@@ -1,0 +1,43 @@
+generator client {
+provider = "prisma-client-js"
+}
+
+
+datasource db {
+provider = "postgresql"
+url = env("DATABASE_URL")
+}
+
+
+model Circular {
+id Int @id @default(autoincrement())
+url String
+className ClassType
+createdAt DateTime @default(now())
+}
+
+
+model Timetable {
+id Int @id @default(autoincrement())
+url String
+className String
+section String
+createdAt DateTime @default(now())
+}
+
+
+model Homework {
+id Int @id @default(autoincrement())
+className ClassType
+section String
+subject String
+teacher String
+createdAt DateTime @default(now())
+}
+
+
+enum ClassType {
+JUNIOR
+PRIMARY
+SENIOR
+}
