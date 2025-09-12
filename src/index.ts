@@ -18,7 +18,7 @@ app.get('/', (req, res) =>
   res.json({ ok: true, message: 'School backend running' })
 )
 
-app.listen(3000, () => {
-  console.log('app running at http://localhost:3000')
+app.listen(3001, () => {
+  console.log('app running at http://localhost:3001')
 })
 export default app
