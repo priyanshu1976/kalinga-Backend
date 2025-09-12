@@ -13,6 +13,7 @@ model Circular {
 id Int @id @default(autoincrement())
 url String
 className ClassType
+title String @default("")
 createdAt DateTime @default(now())
 }
 

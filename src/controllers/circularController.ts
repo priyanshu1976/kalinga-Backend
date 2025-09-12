@@ -4,15 +4,19 @@ const prisma = new PrismaClient()
 
 export async function createCircular(req: Request, res: Response) {
   try {
-    const { url, className } = req.body
-    if (!url || !className)
+    const { url, className, title } = req.body
+    console.log('Creating circular with url:', url, 'and className:', className)
+    if (!url || !className || !title)
       return res.status(400).json({ error: 'Missing fields' })
+    const cls = className.toUpperCase()
 
     const circular = await prisma.circular.create({
-      data: { url, className },
+      data: { url, className: cls, title },
     })
+    console.log('Circular created successfully:', circular)
     res.json({ success: true, circular })
   } catch (err) {
+    console.log('Error creating circular:', err)
     res.status(500).json({ error: (err as Error).message })
   }
 }
