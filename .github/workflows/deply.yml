@@ -24,4 +24,5 @@ jobs:
             git pull origin main
             npm install
             npm run build
+            npx prisma generate client
             pm2 restart kalinga || pm2 start dist/index.js --name kalinga
