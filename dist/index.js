@@ -9,6 +9,7 @@ const circulars_1 = __importDefault(require("./routes/circulars"));
 const timetable_1 = __importDefault(require("./routes/timetable"));
 const homework_1 = __importDefault(require("./routes/homework"));
 const event_route_1 = __importDefault(require("./routes/event.route"));
+const attendence_route_1 = __importDefault(require("./routes/attendence.route"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const helmet_1 = __importDefault(require("helmet"));
@@ -26,6 +27,7 @@ app.use('/api/circular', circulars_1.default);
 app.use('/api/timetable', timetable_1.default);
 app.use('/api/homework', homework_1.default);
 app.use('/api/event', event_route_1.default);
+app.use('/api/attendence', attendence_route_1.default);
 app.get('/', (req, res) => res.json({ ok: true, message: 'School backend running' }));
 app.listen(3001, () => {
     console.log('app running at http://localhost:3001');

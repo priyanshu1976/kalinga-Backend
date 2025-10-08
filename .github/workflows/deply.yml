@@ -25,4 +25,9 @@ jobs:
             npm install
             npm run build
             npx prisma generate client
+
+            # Restart main server
             pm2 restart kalinga || pm2 start dist/index.js --name kalinga
+
+            # Restart attendance worker
+            pm2 restart attendanceWorker || pm2 start dist/workers/attendanceWorker.js --name attendanceWorker
