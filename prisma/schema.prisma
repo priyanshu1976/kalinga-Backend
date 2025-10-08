@@ -43,6 +43,14 @@ model Event{
   teacherId String
 }
 
+model Student{
+  id Int @id @default(autoincrement())
+  name String
+  class String
+  section String
+  attendence Int @default(0)
+}
+
 enum EventType{
   JUNIOR
 PRIMARY
