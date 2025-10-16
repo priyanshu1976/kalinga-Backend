@@ -74,6 +74,7 @@ export async function studentTotalAtt(req: Request, res: Response) {
       attendence: student.attendence,
       presentCount,
       totalDays,
+      fullYear: student.details,
     })
   } catch (error) {
     return res.status(500).json({ error: (error as Error).message })
