@@ -5,20 +5,6 @@
 // const prisma = new PrismaClient()
 
 // // Default details: one string per month, each string is a sequence of '0's for each day in the month
-// const defaultDetails: string[] = [
-//   '0'.repeat(31), // January
-//   '0'.repeat(28), // February
-//   '0'.repeat(31), // March
-//   '0'.repeat(30), // April
-//   '0'.repeat(31), // May
-//   '0'.repeat(30), // June
-//   '0'.repeat(31), // July
-//   '0'.repeat(31), // August
-//   '0'.repeat(30), // September
-//   '0'.repeat(31), // October
-//   '0'.repeat(30), // November
-//   '0'.repeat(31), // December
-// ]
 
 // // Function to update all students in the database with default details if not already set
 // async function addDefaultDetailsToAllStudents() {
@@ -44,15 +30,10 @@
 //     console.error('Error updating students:', err)
 //   })
 
-// import path from 'path'
-// import XLSX from 'xlsx'
-// import { PrismaClient } from '@prisma/client'
-
-// const prisma = new PrismaClient()
-
 // async function readFile() {
 //   try {
 //     const filePath = path.join(__dirname, 'student.xlsx')
+//     console.log(__dirname)
 //     const workbook = XLSX.readFile(filePath)
 //     const sheets = workbook.SheetNames
 
@@ -70,7 +51,7 @@
 
 //       // Define the range where actual data starts (row 4 based on your sheet)
 //       const range = XLSX.utils.decode_range(worksheet['!ref'])
-//       range.s.r = 3 // Start from row 4 (0-indexed, so 3 means row 4)
+//       range.s.r = 2 // Start from row 4 (0-indexed, so 3 means row 4)
 
 //       // Update the worksheet range
 //       worksheet['!ref'] = XLSX.utils.encode_range(range)
@@ -104,7 +85,24 @@
 //           row["Student's Name"] ||
 //           row['STUDENT NAME']
 
-//         console.log('Processing:', name)
+//         const admissionno = row['Adm. No']
+
+//         const defaultDetails: string[] = [
+//           '0'.repeat(31), // January
+//           '0'.repeat(28), // February
+//           '0'.repeat(31), // March
+//           '0'.repeat(30), // April
+//           '0'.repeat(31), // May
+//           '0'.repeat(30), // June
+//           '0'.repeat(31), // July
+//           '0'.repeat(31), // August
+//           '0'.repeat(30), // September
+//           '0'.repeat(31), // October
+//           '0'.repeat(30), // November
+//           '0'.repeat(31), // December
+//         ]
+
+//         console.log('Processing:', name, admissionno)
 
 //         if (!name) {
 //           console.log('Skipping row with no name:', row)
@@ -117,6 +115,8 @@
 //             class: className,
 //             section,
 //             attendence: 0,
+//             admissionNumber: admissionno,
+//             details: defaultDetails,
 //           },
 //         })
 //       }

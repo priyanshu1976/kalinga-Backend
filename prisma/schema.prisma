@@ -49,6 +49,7 @@ model Student{
   class String
   section String
   attendence Int @default(0)
+  admissionNumber Int @default(0)
   details String[] @default([])
 }
 

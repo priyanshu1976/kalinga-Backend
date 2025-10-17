@@ -30,6 +30,7 @@ function getStudents(req, res) {
                     section: section,
                 },
                 select: {
+                    admissionNumber: true,
                     name: true,
                     attendence: true,
                 },
@@ -43,16 +44,15 @@ function getStudents(req, res) {
 }
 function studentTotalAtt(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        var { name } = req.body;
-        name = name.toUpperCase();
-        if (!name) {
-            return res.status(400).json({ error: 'Missing student name' });
+        var { admNo } = req.body;
+        if (!admNo) {
+            return res.status(400).json({ error: 'Missing student admission number' });
         }
         try {
             // Find the student by full name
             const student = yield prisma.student.findFirst({
                 //@ts-ignore
-                where: { name },
+                where: { admissionNumber: admNo },
                 select: {
                     name: true,
                     attendence: true,
