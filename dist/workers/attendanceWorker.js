@@ -15,12 +15,16 @@ const prisma = new client_1.PrismaClient();
 const redis_1 = require("../redis");
 const worker = new bullmq_1.Worker('attendanceQueue', (job) => __awaiter(void 0, void 0, void 0, function* () {
     const { className, section, students } = job.data;
+    console.log('heelo');
+    console.log(className, section, students);
     const now = new Date();
     const monthIndex = now.getMonth();
     const dayIndex = now.getDate() - 1;
     for (const studentData of students) {
-        const { id, present } = studentData;
-        const student = yield prisma.student.findUnique({ where: { id } });
+        const { admissionNumber, present, } = studentData;
+        const student = yield prisma.student.findFirst({
+            where: { admissionNumber },
+        });
         if (!student)
             continue;
         const details = [...student.details];
@@ -48,8 +52,8 @@ const worker = new bullmq_1.Worker('attendanceQueue', (job) => __awaiter(void 0,
             if (chars[dayIndex] === '0') {
                 chars[dayIndex] = '1';
                 monthString = chars.join('');
-                yield prisma.student.update({
-                    where: { id },
+                yield prisma.student.updateManyAndReturn({
+                    where: { admissionNumber },
                     data: {
                         attendence: student.attendence + 1,
                         details: {

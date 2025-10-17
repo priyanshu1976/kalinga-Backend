@@ -40,7 +40,7 @@ export async function studentTotalAtt(req: Request, res: Response) {
 
   try {
     // Find the student by full name
-    const student = await prisma.student.findUnique({
+    const student = await prisma.student.findFirst({
       //@ts-ignore
       where: { admissionNumber: admNo },
       select: {

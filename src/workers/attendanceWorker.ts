@@ -13,9 +13,15 @@ const worker = new Worker(
     const dayIndex = now.getDate() - 1
 
     for (const studentData of students) {
-      const { id, present } = studentData
+      const {
+        admissionNumber,
+        present,
+      }: { admissionNumber: number; present: boolean } = studentData
 
-      const student = await prisma.student.findUnique({ where: { id } })
+      const student = await prisma.student.findFirst({
+        where: { admissionNumber },
+      })
+
       if (!student) continue
 
       const details = [...student.details]
@@ -44,8 +50,8 @@ const worker = new Worker(
           chars[dayIndex] = '1'
           monthString = chars.join('')
 
-          await prisma.student.update({
-            where: { id },
+          await prisma.student.updateManyAndReturn({
+            where: { admissionNumber },
             data: {
               attendence: student.attendence + 1,
               details: {
