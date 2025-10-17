@@ -10,6 +10,8 @@ export async function createEvent(req: Request, res: Response) {
     return res.status(400).json({ error: 'Missing fields' })
   }
 
+  console.log(req.body)
+
   try {
     const event = await prisma.event.create({
       data: {
@@ -20,6 +22,7 @@ export async function createEvent(req: Request, res: Response) {
     })
     return res.status(201).json({ success: true, event })
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ error: (error as Error).message })
   }
 }

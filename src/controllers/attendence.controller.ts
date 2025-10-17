@@ -81,7 +81,7 @@ export async function studentTotalAtt(req: Request, res: Response) {
   }
 }
 export async function markAttendance(req: Request, res: Response) {
-  const { class: className, section, students } = req.body
+  const { className, section, students } = req.body
 
   if (!className || !section || !students)
     return res.status(400).json({ error: 'Missing required fields' })

@@ -80,6 +80,7 @@ function studentTotalAtt(req, res) {
                 attendence: student.attendence,
                 presentCount,
                 totalDays,
+                fullYear: student.details,
             });
         }
         catch (error) {
@@ -89,7 +90,7 @@ function studentTotalAtt(req, res) {
 }
 function markAttendance(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { class: className, section, students } = req.body;
+        const { className, section, students } = req.body;
         if (!className || !section || !students)
             return res.status(400).json({ error: 'Missing required fields' });
         try {
