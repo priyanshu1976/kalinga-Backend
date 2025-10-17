@@ -56,7 +56,7 @@ export async function studentTotalAtt(req: Request, res: Response) {
 
     // Get current month and year
     const now = new Date()
-    const currentMonth = now.getMonth() + 1 // JS months are 0-based
+    const currentMonth = now.getMonth() // JS months are 0-based
 
     // Filter details for this month
     // Assuming details are stored as ISO date strings

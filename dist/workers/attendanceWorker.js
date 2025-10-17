@@ -15,8 +15,6 @@ const prisma = new client_1.PrismaClient();
 const redis_1 = require("../redis");
 const worker = new bullmq_1.Worker('attendanceQueue', (job) => __awaiter(void 0, void 0, void 0, function* () {
     const { className, section, students } = job.data;
-    console.log('heelo');
-    console.log(className, section, students);
     const now = new Date();
     const monthIndex = now.getMonth();
     const dayIndex = now.getDate() - 1;
