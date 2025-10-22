@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 export async function createCircular(req: Request, res: Response) {
   try {
-    const { url, className, title } = req.body
+    const { url, className, section, title } = req.body
     console.log('Creating circular with url:', url, 'and className:', className)
     if (!url || !className || !title)
       return res.status(400).json({ error: 'Missing fields' })

@@ -12,9 +12,10 @@ url = env("DATABASE_URL")
 model Circular {
 id Int @id @default(autoincrement())
 url String
-className ClassType
+type ClassType
 title String @default("")
 createdAt DateTime @default(now())
+teacherId String
 }
 
 
@@ -29,10 +30,11 @@ createdAt DateTime @default(now())
 
 model Homework {
 id Int @id @default(autoincrement())
-className ClassType
+className String
 section String
-subject String
-teacher String
+title String
+pdf_url String
+teacherId String
 createdAt DateTime @default(now())
 }
 
@@ -65,4 +67,5 @@ enum ClassType {
 JUNIOR
 PRIMARY
 SENIOR
+ALL
 }
