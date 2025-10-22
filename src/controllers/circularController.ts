@@ -4,14 +4,14 @@ const prisma = new PrismaClient()
 
 export async function createCircular(req: Request, res: Response) {
   try {
-    const { url, className, section, title } = req.body
-    console.log('Creating circular with url:', url, 'and className:', className)
-    if (!url || !className || !title)
+    var { url, type, teacherId, title } = req.body
+    // console.log('Creating circular with url:', url, 'and className:', className)
+    if (!url || !type || !teacherId || !title)
       return res.status(400).json({ error: 'Missing fields' })
-    const cls = className.toUpperCase()
+    type = type.toUpperCase()
 
     const circular = await prisma.circular.create({
-      data: { url, className: cls, title },
+      data: { url, type, title, teacherId },
     })
     console.log('Circular created successfully:', circular)
     res.json({ success: true, circular })
@@ -23,9 +23,21 @@ export async function createCircular(req: Request, res: Response) {
 
 export async function getCircularsByClass(req: Request, res: Response) {
   try {
-    const className = req.params.className.toUpperCase()
+    const className = req.params.className?.toUpperCase()
+    let whereCond = {}
+
+    if (className && className !== 'ALL') {
+      // get both circulars for the specific class and for ALL
+      whereCond = {
+        OR: [{ type: className }, { type: 'ALL' }],
+      }
+    } else {
+      // only 'ALL' (if "ALL" is explicitly requested or no className)
+      whereCond = { type: 'ALL' }
+    }
+
     const circulars = await prisma.circular.findMany({
-      where: { className } as any,
+      where: whereCond,
       orderBy: { createdAt: 'desc' },
     })
     res.json({ success: true, circulars })
@@ -40,6 +52,21 @@ export async function deleteCircular(req: Request, res: Response) {
     await prisma.circular.delete({ where: { id } })
     res.json({ success: true, message: 'Deleted' })
   } catch (err) {
+    res.status(500).json({ error: (err as Error).message })
+  }
+}
+export async function getAll(req: Request, res: Response) {
+  try {
+    console.log('this code is running')
+    // Get all circulars, ordered by createdAt descending
+    const circulars = await prisma.circular.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+    res.json({ success: true, circulars })
+  } catch (err) {
+    console.log('here is the error ')
     res.status(500).json({ error: (err as Error).message })
   }
 }
