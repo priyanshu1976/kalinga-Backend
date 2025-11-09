@@ -19,6 +19,9 @@ export async function newPhoto(req: Request, res: Response) {
 
   try {
     // Find existing event by title
+
+    const exist = await prisma.photo.findFirst({ where: { eventName } })
+    if (exist) return res.status(400).json({ error: 'event already present' })
     const data = await prisma.photo.create({
       data: { eventName: name, photoUrl },
     })
