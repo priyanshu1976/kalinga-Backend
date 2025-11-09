@@ -4,6 +4,7 @@ import circularRoutes from './routes/circulars'
 import timetableRoutes from './routes/timetable'
 import homeworkRoutes from './routes/homework'
 import eventRoutes from './routes/event.route'
+import photoRoutes from './routes/photo'
 import attendenceRouter from './routes/attendence.route'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -25,6 +26,7 @@ app.use('/api/timetable', timetableRoutes)
 app.use('/api/homework', homeworkRoutes)
 app.use('/api/event', eventRoutes)
 app.use('/api/attendence', attendenceRouter)
+app.use('/api/photo', photoRoutes)
 
 app.get('/', (req, res) =>
   res.json({ ok: true, message: 'School backend running' })
