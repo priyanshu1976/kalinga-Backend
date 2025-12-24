@@ -17,7 +17,7 @@ app.use(express.json())
 // Helmet helps secure Express apps by setting various HTTP headers to protect against common vulnerabilities.
 if (process.env.MODE == 'dev') {
   app.use(helmet())
-  // Morgan is an HTTP request logger middleware for Node.js, used here in 'dev' mode for concise colored output.
+  // Morgan is an HTTP request logger middleware for Node.js, used here in 'dev' mode for concise colored output
   app.use(morgan('dev'))
 }
 
