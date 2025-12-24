@@ -1,3 +1,5 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import express from 'express'
 import cors from 'cors'
 import circularRoutes from './routes/circulars'
@@ -6,8 +8,6 @@ import homeworkRoutes from './routes/homework'
 import eventRoutes from './routes/event.route'
 import photoRoutes from './routes/photo'
 import attendenceRouter from './routes/attendence.route'
-import dotenv from 'dotenv'
-dotenv.config()
 import helmet from 'helmet'
 import morgan from 'morgan'
 
